@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Web Component Example - Hello World</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
+    <link rel="stylesheet" type="text/css" href="../../style.css" />
+    <style>
+      hello-world {
+        display: block;
+        font-size: 1em;
+        font-family: sans-serif;
+        color: rgb(55, 53, 47);
+        border-inline-start: 0.2em solid rgb(4, 107, 39);
+        padding-inline-start: 1em;
+      }
+
+      hello-world > h1 {
+        font-family: monospace;
+        text-transform: uppercase;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- the custom element -->
+    <hello-world greeting-target="Luis"></hello-world>
+
+    <!-- the custom element definition -->
+    <script type="module">
+      class HelloWorld extends HTMLElement {
+        static get observedAttributes() {
+          return ["greeting-target"];
+        }
+
+        get greetingTarget() {
+          return this.getAttribute("greeting-target") ?? "World";
+        }
+
+        set greetingTarget(value) {
+          if (value && value !== "") {
+            return this.setAttribute("greeting-target", value);
+          } else {
+            return this.removeAttribute("greeting-target");
+          }
+        }
+
+        connectedCallback() {
+          this.#render({
+            greetingTarget: this.greetingTarget,
+          });
+        }
+
+        attributeChangedCallback(name, _oldValue, _newValue) {
+          if (name === "greeting-target") {
+            this.#render({ greetingTarget: this.greetingTarget });
+          }
+        }
+
+        #render({ greetingTarget }) {
+          this.innerHTML = `
+            <h1>Hello ${greetingTarget}</h1>
+            <p>Hello from the internet!</p>
+          `;
+        }
+      }
+      customElements.define("hello-world", HelloWorld);
+    </script>
+    <script type="module">
+      const customHelloWorld = document.querySelector("hello-world");
+
+      // this should change the greeting to "Hello Alice"
+      customHelloWorld.setAttribute("greeting-target", "Alice");
+    </script>
+  </body>
+</html>

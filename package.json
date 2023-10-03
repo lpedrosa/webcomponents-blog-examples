@@ -1,0 +1,12 @@
+{
+  "name": "webcomponents-blog-examples",
+  "version": "1.0.0",
+  "scripts": {
+    "serve": "npx http-server -c-1"
+  },
+  "author": "lpedrosa",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
