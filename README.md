@@ -1,8 +1,8 @@
-# Examples used in my Web Components blog article
+# Web Component Examples
 
-The article is divided into 3 parts:
+The blog post series is divided into 3 parts:
 
-* [Part 1](#)
+* [Part 1](https://lpedrosa.github.io/blog/web-components-part-1)
 * [Part 2](#)
 * [Part 3](#)
 
