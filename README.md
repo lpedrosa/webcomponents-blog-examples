@@ -15,7 +15,9 @@ The blog post series is divided into 3 parts:
 
 ## Contributing
 
-Open an issue if you wish to discuss a better way of something or submit a PR if you spot a bug.
+Open an issue if you wish to discuss a better way of doing something.
+
+You can also submit a PR if you spot a bug.
 
 ## License
 
