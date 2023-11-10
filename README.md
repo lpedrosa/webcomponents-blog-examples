@@ -4,7 +4,7 @@ The blog post series is divided into 3 parts:
 
 * [Part 1](https://lpedrosa.github.io/blog/web-components-part-1)
 * [Part 2](https://lpedrosa.github.io/blog/web-components-part-2)
-* [Part 3](#)
+* [Part 3](https://lpedrosa.github.io/blog/web-components-part-3)
 
 ## Running
 
