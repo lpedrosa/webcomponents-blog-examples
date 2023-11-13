@@ -13,31 +13,38 @@ const INITIAL_TODOS = [
   },
 ];
 
-let todos = INITIAL_TODOS;
+export class TodoApiClient {
+  #todos;
+  #nextTodoId;
 
-let nextTodoId = 3;
+  constructor(opts = {}) {
+    this.inducedLatency = opts?.inducedLatency ?? DEFAULT_SLEEP_TIME_MS;
+    this.#todos = INITIAL_TODOS;
+    this.#nextTodoId = Math.max(...INITIAL_TODOS.map((t) => t.todoId)) + 1;
+  }
 
-export async function createTodo(content) {
-  const newTodo = {
-    todoId: nextTodoId++,
-    content,
-    done: false,
-  };
+  async create(content) {
+    const newTodo = {
+      todoId: this.#nextTodoId++,
+      content,
+      done: false,
+    };
 
-  todos.push(newTodo);
+    this.#todos.push(newTodo);
 
-  return new Promise((resolve) =>
-    setTimeout(resolve, DEFAULT_SLEEP_TIME_MS)
-  ).then(() => ({ ...newTodo }));
-}
+    return new Promise((resolve) =>
+      setTimeout(resolve, this.inducedLatency)
+    ).then(() => ({ ...newTodo }));
+  }
 
-export async function getAllTodos() {
-  return new Promise((resolve) =>
-    setTimeout(resolve, DEFAULT_SLEEP_TIME_MS)
-  ).then(() => [...todos]);
-}
+  async getAll() {
+    return new Promise((resolve) =>
+      setTimeout(resolve, this.inducedLatency)
+    ).then(() => [...this.#todos]);
+  }
 
-export async function removeTodo(todoId) {
-  todos = todos.filter((todo) => todo.todoId !== todoId);
-  return new Promise((resolve) => setTimeout(resolve, DEFAULT_SLEEP_TIME_MS));
+  async remove(todoId) {
+    this.#todos = this.#todos.filter((todo) => todo.todoId !== todoId);
+    return new Promise((resolve) => setTimeout(resolve, this.inducedLatency));
+  }
 }
